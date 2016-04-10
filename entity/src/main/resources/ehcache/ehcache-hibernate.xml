@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ehcache updateCheck="false" name="hibernate">
+
+    <diskStore path="java.io.tmpdir/ehcache/ewcms/hibernate"/>
+
+    <defaultCache
+            maxEntriesLocalHeap="1000"
+            eternal="false"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            overflowToDisk="false">
+    </defaultCache>
+
+    <cache name="com.ewcms.security.user.entity.User"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.user.entity.User.organizationJobs"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.user.entity.UserOrganizationJob"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.organization.entity.Job"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.organization.entity.Organization"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.permission.entity.Permission"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.permission.entity.Role"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.group.entity.Group"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.resource.entity.Resource"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.permission.entity.RoleResourcePermission"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.permission.entity.Role.resourcePermissions"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.auth.entity.Auth"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+
+    <cache name="com.ewcms.security.user.entity.UserOnline"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    <cache name="com.ewcms.security.user.entity.UserLastOnline"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+
+	<cache name="com.ewcms.security.acl.entity.AclClass"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+    
+    <cache name="com.ewcms.security.acl.entity.AclEntry"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+	
+	<cache name="com.ewcms.security.acl.entity.AclObjectIdentity"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+
+	<cache name="com.ewcms.security.acl.entity.AclSid"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="3600"
+           timeToLiveSeconds="3600"
+           overflowToDisk="false">
+    </cache>
+
+    <cache
+            name="org.hibernate.cache.internal.StandardQueryCache"
+            maxEntriesLocalHeap="5000"
+            eternal="false"
+            timeToLiveSeconds="3600"
+            overflowToDisk="false"/>
+
+    <cache
+            name="org.hibernate.cache.spi.UpdateTimestampsCache"
+            maxEntriesLocalHeap="5000"
+            eternal="true"
+            overflowToDisk="true"/>
+
+</ehcache>

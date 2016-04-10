@@ -1,0 +1,143 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<context:property-placeholder location="classpath:resources.properties" />
+
+	<!-- 开启controller注解支持 -->
+	<!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
+	<context:component-scan base-package="com.ewcms" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	
+	<!-- 会自动注册了validator ConversionService -->
+	<mvc:annotation-driven validator="validator" conversion-service="conversionService" content-negotiation-manager="contentNegotiationManager"	enable-matrix-variables="true">
+		<!-- 异步支持 默认30秒超时 -->
+		<mvc:async-support default-timeout="30000" task-executor="executor" />
+
+		<mvc:message-converters register-defaults="true">
+			<!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<constructor-arg value="UTF-8" />
+				<property name="supportedMediaTypes">
+					<list>
+						<bean class="org.springframework.http.MediaType">
+							<constructor-arg index="0" value="text" />
+							<constructor-arg index="1" value="plain" />
+							<constructor-arg index="2" value="UTF-8" />
+						</bean>
+						<bean class="org.springframework.http.MediaType">
+							<constructor-arg index="0" value="*" />
+							<constructor-arg index="1" value="*" />
+							<constructor-arg index="2" value="UTF-8" />
+						</bean>
+					</list>
+				</property>
+			</bean>
+
+			<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
+			<bean id="fastJsonHttpMessageConverter"
+				class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json;charset=UTF-8</value>
+						<value>text/json;charset=UTF-8</value>
+					</list>
+				</property>
+				<property name="features">
+					<!--这个地方加上这个功能吧，能自己配置一些东西，比如时间的格式化，null输出""等等 -->
+					<util:list>
+						<value>DisableCircularReferenceDetect</value>
+						<value>WriteNullStringAsEmpty</value>
+					</util:list>
+				</property>
+			</bean>
+		</mvc:message-converters>
+
+		<mvc:argument-resolvers>
+			<bean class="com.ewcms.security.user.web.bind.method.CurrentUserMethodArgumentResolver" />
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
+	<mvc:view-controller path="/" view-name="redirect:/home" />
+	<!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+	<mvc:default-servlet-handler />
+
+	<!-- 静态资源映射 -->
+	<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
+
+	<!-- 拦截器设置 -->
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
+			<constructor-arg ref="conversionService" />
+		</bean>
+		<bean class="com.ewcms.common.web.interceptor.SetCommonDataInterceptor">
+			<property name="excludeUrlPatterns">
+				<value>
+					/polling
+				</value>
+			</property>
+		</bean>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/polling"/>
+			<bean class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" />
+		</mvc:interceptor>
+		<!--<mvc:interceptor> -->
+		<!--<mvc:mapping path="/**"/> -->
+		<!--<bean class="cn.javass.test.interceptor.TestInterceptor"/> -->
+		<!--</mvc:interceptor> -->
+	</mvc:interceptors>
+
+	<!-- 内容协商管理器 -->
+	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+		<!-- 是否忽略Accept Header -->
+		<property name="ignoreAcceptHeader" value="true" />
+		<!-- 默认的content type -->
+		<property name="defaultContentType" value="application/json" />
+		<property name="mediaTypes">
+			<value>
+				json=application/json
+				xml=application/xml
+			</value>
+		</property>
+	</bean>
+
+	<!-- ========================= VIEW定义 ========================= -->
+	<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="contentType" value="text/html" />
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 文件上传相关 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--one of the properties available;the maximum upload size in bytes 100M -->
+		<property name="maxUploadSize" value="104857600" />
+	</bean>
+
+	<!-- 控制器异常处理 -->
+	<bean id="exceptionHandlerExceptionResolver"
+		class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+		<property name="contentNegotiationManager" ref="contentNegotiationManager" />
+	</bean>
+
+	<bean class="com.ewcms.extra.exception.web.DefaultExceptionHandler" />
+
+	<import resource="spring-mvc-shiro.xml" />
+	<!--<import resource="spring-speed-up.xml"/> -->
+
+</beans>

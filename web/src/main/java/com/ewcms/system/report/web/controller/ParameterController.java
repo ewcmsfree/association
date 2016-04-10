@@ -1,0 +1,81 @@
+package com.ewcms.system.report.web.controller;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.validation.Valid;
+
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.ewcms.common.web.controller.BaseCRUDController;
+import com.ewcms.system.report.entity.ChartReport;
+import com.ewcms.system.report.entity.Parameter;
+import com.ewcms.system.report.entity.TextReport;
+import com.ewcms.system.report.service.ChartReportService;
+import com.ewcms.system.report.service.ParameterService;
+import com.ewcms.system.report.service.TextReportService;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
+
+/**
+ * @author 吴智俊
+ */
+@Controller
+@RequestMapping(value = "/system/report/parameter")
+public class ParameterController extends BaseCRUDController<Parameter, Long>{
+
+	@Autowired
+	private ParameterService parameterService;
+	@Autowired
+	private TextReportService textReportService;
+	@Autowired
+	private ChartReportService chartReportService;
+	
+	@Override
+	protected void setCommonData(Model model) {
+		super.setCommonData(model);
+		model.addAttribute("typeMap",Parameter.Type.values());
+	}
+	
+	@RequestMapping(value = "{reportType}/{reportId}/index")
+	public String index(@PathVariable(value = "reportType") String reportType, @PathVariable(value = "reportId") Long reportId, Model model){
+		return super.index(model);
+	}
+	
+	@RequestMapping(value = "{reportType}/{reportId}/save",method = RequestMethod.GET)
+	public String showSaveForm(@PathVariable(value = "reportType") String reportType, @PathVariable(value = "reportId") Long reportId, Model model, @RequestParam(required = false) List<Long> selections){
+		return super.showSaveForm(model, selections);
+	}	
+	
+	@RequestMapping(value = "{reportType}/{reportId}/save", method = RequestMethod.POST)
+	public String save(@PathVariable(value = "reportType") String reportType, @PathVariable(value = "reportId") Long reportId,Model model, @Valid @ModelAttribute("m") Parameter m, BindingResult result, @RequestParam(required = false) List<Long> selections) {
+		return super.save(model, m, result, selections);
+	}
+	
+	@RequestMapping(value = "{reportType}/{reportId}/query")
+	public @ResponseBody Map<String, Object> query(@PathVariable(value = "reportType")String reportType, @PathVariable(value = "reportId")Long reportId){
+		Map<String, Object> resultMap = Maps.newHashMap();
+		Long count = 0L;
+		Set<Parameter> parameters = Sets.newLinkedHashSet();
+		if (reportType.toLowerCase().trim().equals("text")){
+			TextReport textReport = textReportService.findOne(reportId);
+			parameters = textReport.getParameters();
+		}else if (reportType.toLowerCase().trim().equals("chart")){
+			ChartReport chartReport = chartReportService.findOne(reportId);
+			parameters = chartReport.getParameters();
+		}
+		resultMap.put("total", count);
+		resultMap.put("rows", parameters);
+		return resultMap;
+	}
+}

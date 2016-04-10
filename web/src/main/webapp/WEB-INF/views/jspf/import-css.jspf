@@ -1,0 +1,20 @@
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/easyui/themes/default/easyui.css" title="default"/>
+	<!-- 
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/easyui/themes/black/easyui.css" title="black"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/easyui/themes/bootstrap/easyui.css" title="bootstrap"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/easyui/themes/gray/easyui.css" title="gray"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/easyui/themes/metro/easyui.css" title="metro"/>
+     -->
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/easyui/themes/icon.css"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/css/ewcms.css?1"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/css/icon.css?1"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/css/button.css?1"/>
+    <link rel="stylesheet" type="text/css" href="${ctx}/static/jQuery-Validation-Engine/css/validationEngine.jquery-ciaoca.css"/>
+    <script>
+        var ctx = '${ctx}';
+    </script>
+
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="${ctx}/static/js/loading.js"></script>
+    

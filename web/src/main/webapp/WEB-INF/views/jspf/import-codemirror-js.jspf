@@ -1,0 +1,12 @@
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/lib/codemirror.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/addon/fold/foldcode.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/addon/fold/foldgutter.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/addon/fold/brace-fold.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/addon/fold/xml-fold.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/addon/fold/markdown-fold.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/addon/fold/comment-fold.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/mode/xml/xml.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/mode/javascript/javascript.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/mode/css/css.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/mode/markdown/markdown.js"></script>
+<script type="text/javascript" src="${ctx}/static/codemirror/5.1/mode/sql/sql.js"></script>

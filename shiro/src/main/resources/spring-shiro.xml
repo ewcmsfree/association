@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="
+          http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!---cookie-->
+    <!-- uid(session id) 生成策略 -->
+    <bean id="sessionIdGenerator" class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>
+    
+    <bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="${shiro.uid.cookie.name}"/>
+        <property name="domain" value="${shiro.uid.cookie.domain}"/>
+        <property name="path" value="${shiro.uid.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.uid.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.uid.cookie.maxAge}"/>
+    </bean>
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="${shiro.uid.rememeberMe.cookie.name}"/>
+        <property name="domain" value="${shiro.uid.cookie.domain}"/>
+        <property name="path" value="${shiro.uid.cookie.path}"/>
+        <property name="httpOnly" value="${shiro.uid.cookie.httpOnly}"/>
+        <property name="maxAge" value="${shiro.uid.rememeberMe.cookie.maxAge}"/>
+    </bean>
+
+    <!-- manager -->
+    <!-- Remembered vs Authenticated http://www.ituring.com.cn/article/287 -->
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <!-- rememberme cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位）-->
+        <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('${shiro.uid.rememeberMe.cookie.base64.cipherKey}')}"/>
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+</beans>
