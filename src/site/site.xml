@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="江西省科协管理系统">
+    <publishDate position="left" format="yyyy-MM-dd HH:mm" />
+    <version position="left"/>    
+    <bannerLeft>
+        <name>EWCMS</name>
+        <src>http://maven.apache.org/images/apache-maven-project-2.png</src>
+        <href>index.html</href>
+    </bannerLeft>
+    <bannerRight>
+        <name>江西省科协管理系统</name>
+        <href>index.html</href>
+    </bannerRight>
+    <body>
+        <menu name="使用指南"  inherit="top">
+            <item name="总体概览" href="/index.html"/>
+            <item name="生成项目" href="/index.html"/>
+            <item name="基础设施" href="/index.html"/>
+            <item name="代码生成" href="/index.html"/>
+        </menu>
+        <menu name="项目"  inherit="top">
+            <item name="association-parent" href="/index.html"/>
+            <item name="ewcms-common" href="/ewcms-common/index.html"/>
+            <item name="ewcms-entity" href="/ewcms-entity/index.html"/>
+            <item name="ewcms-externalds" href="/ewcms-externalds/index.html"/>
+            <item name="ewcms-report" href="/ewcms-report/index.html"/>
+            <item name="ewcms-shiro" href="/ewcms-shiro/index.html"/>
+            <item name="association-manage" href="/association-manage/index.html"/>
+        </menu>
+        <links>
+            <item name="GitHub" href="http://github.com/ewcmsfree"/>
+        </links>
+        <menu ref="reports" inherit="top"/>
+    </body>
+    <skin>
+        <groupId>org.apache.maven.skins</groupId>
+        <artifactId>maven-fluido-skin</artifactId>
+        <version>1.5</version>
+    </skin>
+    <custom>
+        <fluidoSkin>
+            <sideBarEnabled>true</sideBarEnabled>
+        </fluidoSkin>
+    </custom>
+</project>
