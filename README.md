@@ -2,24 +2,24 @@
 * 目前作为基本的人事管理系统
 
 ##数据库备份
-pg_dump.exe --host localhost --username postgres --encoding UTF8 --file C:\ewcms_association.dump ewcms_association
+	pg_dump.exe --host localhost --username postgres --encoding UTF8 --file C:\ewcms_association.dump ewcms_association
 
 ##数据库恢复
-psql.exe --host localhost --username postgres --dbname ewcms_rc < E:\work\ewcms_association.dump
+	psql.exe --host localhost --username postgres --dbname ewcms_rc < E:\work\ewcms_association.dump
 
 ##修改catalina.sh
-JAVA_OPTS="$JAVA_OPTS -server -Xms800m -Xmx800m -XX:PermSize=64m -XX:MaxNewSize=256m -XX:MaxPermSize=128m -Djava.awt.headless=true"
+	JAVA_OPTS="$JAVA_OPTS -server -Xms800m -Xmx800m -XX:PermSize=64m -XX:MaxNewSize=256m -XX:MaxPermSize=128m -Djava.awt.headless=true"
 
 ##在%TOMCAT_HOM%/conf/server.xml其中：
-把<Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>替换成
-<Connector port="8082" protocol="org.apache.coyote.http11.Http11NioProtocol"
+	把<Connector connectionTimeout="20000" port="8080" protocol="HTTP/1.1" redirectPort="8443"/>替换成
+	<Connector port="8082" protocol="org.apache.coyote.http11.Http11NioProtocol"
            maxThreads="600" minSpareThreads="100" maxSpareThreads="500"
            enableLookups="false"
            acceptCount="700" debug="0" connectionTimeout="20000"
            proxyPort="80" disableUploadTimeout="true" URIEncoding="UTF-8"/>       
         
 ##iReport开发的报表乱码，增加如下设置:
-	 CATALINA_OPTS='-Djava.awt.headless=true' 
+	CATALINA_OPTS='-Djava.awt.headless=true' 
 
 ##压力测试:
 C:\apache>ab -n 100 -c 30 http://域名/
