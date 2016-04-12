@@ -5,7 +5,6 @@ import com.ewcms.common.entity.search.Searchable;
 import com.ewcms.common.service.BaseService;
 import com.ewcms.common.utils.EmptyUtil;
 import com.ewcms.common.utils.PatternUtils;
-import com.ewcms.personnel.archive.service.ArchiveService;
 import com.ewcms.security.user.entity.User;
 import com.ewcms.security.user.entity.UserStatus;
 import com.ewcms.security.user.exception.UserBlockedException;
@@ -39,12 +38,8 @@ public class UserService extends BaseService<User, Long> {
 
     @Autowired
     private UserStatusHistoryService userStatusHistoryService;
-
     @Autowired
     private PasswordService passwordService;
-    
-    @Autowired
-    private ArchiveService archiveService;
 
     public void setPasswordService(PasswordService passwordService) {
         this.passwordService = passwordService;
@@ -56,6 +51,17 @@ public class UserService extends BaseService<User, Long> {
         user.setPassword(passwordService.encryptPassword(user.getUsername(), user.getPassword(), user.getSalt()));
 
         return super.save(user);
+    }
+    
+    /**
+     * 页面注册用户，不进行cache
+     * @param user
+     */
+    public void registerUser(User user){
+    	user.randomSalt();
+        user.setPassword(passwordService.encryptPassword(user.getUsername(), user.getPassword(), user.getSalt()));
+
+        super.save(user);
     }
 
     @Override

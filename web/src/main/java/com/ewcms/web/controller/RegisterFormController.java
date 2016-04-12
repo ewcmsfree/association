@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.ewcms.common.Constants;
 import com.ewcms.common.web.controller.BaseController;
 import com.ewcms.common.web.validate.ValidateResponse;
+//import com.ewcms.extra.aop.UserCacheAspect;
 import com.ewcms.security.user.entity.User;
 import com.ewcms.security.user.service.UserService;
 
@@ -40,7 +41,8 @@ public class RegisterFormController extends BaseController<User, Long>{
         }
 		
 		m.setIsRegister(true);
-		userService.save(m);
+		userService.registerUser(m);
+		
 		redirectAttributes.addFlashAttribute(Constants.MESSAGE, "注册成功，请重新登录！");
 		return redirectToUrl("login");
 	}
