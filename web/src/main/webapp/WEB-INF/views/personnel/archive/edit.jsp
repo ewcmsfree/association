@@ -18,6 +18,7 @@
 		 	<form:form id="editForm" method="post" action="${ctx}/personnel/archive/save" commandName="m" class="form-horizontal" style="position:relative; margin-left:10px;">
 		    	<ewcms:showGlobalError commandName="m"/>
 		    	<form:hidden path="id"/>
+		    	<form:hidden path="userId"/>
 		    	<form:hidden path="deleted"/>
 		  		<table style="width:99%;baborder: #B7D8ED 1px solid;" class="formtable">
 					<tr>
@@ -286,7 +287,7 @@
 		});
 		
 		$('#tb-print').bind('click', function(){
-			window.open('${ctx}/personnel/archive/print','popup','width=1280,height=700,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,scrollbars=yes,left=' + (window.screen.width - 1280)/ 2 + ',top=' + (window.screen.height - 700) / 2);
+			window.open('${ctx}/personnel/archive/printCurrentUser','popup','width=1280,height=700,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,scrollbars=yes,left=' + (window.screen.width - 1280)/ 2 + ',top=' + (window.screen.height - 700) / 2);
 		});
 		
 		var validationEngine = $("#editForm").validationEngine({

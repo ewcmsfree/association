@@ -3,6 +3,11 @@
 	<name>web</name>
 	<comment></comment>
 	<projects>
+		<project>report</project>
+		<project>common</project>
+		<project>externalds</project>
+		<project>entity</project>
+		<project>shiro</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

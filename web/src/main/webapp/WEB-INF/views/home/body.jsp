@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-		<div data-options="region:'north',border:false" style="height:60px;borderoverflow:no;">
+		<div data-options="region:'north',border:false" style="height:60px;overflow:no;">
 		    <h2 align="center">欢迎使用江西省科协管理平台系统</h2>
 		</div>
-		<div data-options="region:'center',border:false">
+		<div data-options="region:'center',border:false" style="width:35%;overflow:auto;">
 			<table style="width:100%;padding:0;">
 		    	<tr>
 		    		<td width="1%"></td>
@@ -36,37 +36,56 @@
 		    	</tr>
 		    </table>
 		</div>
-		<div data-options="region:'west',border:false" style="width:65%">
+		<div data-options="region:'west',border:false" style="width:65%;overflow: auto;">
 		    <table style="width:100%;padding:0;">
 		    	<tr>
 		    		<td width="1%"></td>
-		    		<td colspan="3" class="portal-column-td" width="98%">
-		    			<div class="panel" style="margin-bottom:2px;">
-		                 	<div class="panel-header">
-		                   		<div class="panel-title">提示栏</div>
-		                   		<div class="panel-tool">
-		                    		<a href="javascript:void(0);" style="display:inline;"></a>
-		                   		</div>
-		                 	</div>
-		                 	<div style="height:170px; padding: 5px;" title="" id="tip" class="portal-p panel-body" data-options="closable:true,collapsible:false">
-		                 		<div class="t-list">
-		                 			<table style="width:100%;">
-		                 				<tr>	
-			                 				<td>
-			                 					1、<span id="countArchive"></span>
-			                 				</td>
-		                 				</tr>
-		                 				<tr>
-		                 					<td>
-		                 						2、目前在线人数：<span id="onlineCount"></span>人
-		                 					</td>
-		                 				</tr>
-		                 			</table>
+		           	<td class="portal-column-td" width="48%">
+		            	<div style="overflow:hidden;padding:0 0 0 0">
+		               		<div class="panel" style="margin-bottom:2px;">
+		                 		<div class="panel-header">
+		                   			<div class="panel-title">提示栏</div>
+		                   			<div class="panel-tool">
+		                     			<a href="javascript:void(0);" style="display:inline;"></a>
+		                   			</div>
 		                 		</div>
-		                 	</div>
-		               	</div>
-		    		</td>
-		    		<td width="1%"></td>
+		                 		<div style="height: 170px; padding: 5px;" title="" id="tip" class="portal-p panel-body" data-options="closable:true,collapsible:false">
+		                 			<div class="t-list">
+		                 				<table style="width:100%;">
+		                 					<tr>	
+			                 					<td>
+			                 						1、现已登记人数：<span id="totalArchive"></span>人
+			                 					</td>
+		                 					</tr>
+		                 					<tr>
+		                 						<td>
+		                 							2、目前在线人数：<span id="onlineCount"></span>人
+		                 						</td>
+		                 					</tr>
+		                 				</table>
+		                 			</div>
+		                 		</div>
+		               		</div>
+		             	</div>
+		           	</td>
+		           	<td width="1%"></td>
+		           	<td class="portal-column-td" width="48%">
+		            	<div style="overflow:hidden;padding:0 0 0 0">
+		               		<div class="panel" style="margin-bottom:2px;">
+		                 		<div class="panel-header">
+		                   			<div class="panel-title panel-with-icon">图表栏</div>
+		                   			<div class="panel-icon icon-visit-analysis"></div>
+		                   			<div class="panel-tool">
+		                     			<a href="javascript:void(0);" class="icon-reload panel-tool-a" onclick="archiveChart();" title="刷新"></a>
+		                   			</div>
+		                 		</div>
+			             		<div style="height: 170px; padding: 5px;" title="" class="portal-p panel-body" data-options="closable:true,collapsible:false">
+		        					<div id="pieDiv" align="center"></div>
+				    			</div>
+				    		</div>
+				    	</div>
+					</td>
+		           	<td width="1%"></td>
 		    	</tr>
 		    	<tr>
 		        	<td width="1%"></td>

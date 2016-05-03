@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="archivebaseinfo" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="27"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1"/>
+	<subDataset name="Table Dataset 2"/>
+	<parameter name="organization_id" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT acad_office, birthday, create_time, deleted, duties, fax,
+       goreign_level, allowance, is_bodao, is_shuodao, job_resume, job_status,
+       learning_situation, located, t1.name, now_professional, office_phone,
+       political, postal_address, sex, situation_resume, specialty,
+       status, titles, user_id, work_address, zip_code, nation_id,t2.name AS organizationName
+  FROM pel_archive AS t1,sec_organization AS t2,pel_archive_organization AS t3
+  WHERE t1.id=t3.archive_id AND t3.organization_id=t2.id  AND t2.id=$P{organization_id}]]>
+	</queryString>
+	<field name="acad_office" class="java.lang.String"/>
+	<field name="birthday" class="java.sql.Date"/>
+	<field name="create_time" class="java.sql.Timestamp"/>
+	<field name="deleted" class="java.lang.Boolean"/>
+	<field name="duties" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="goreign_level" class="java.lang.String"/>
+	<field name="allowance" class="java.lang.String"/>
+	<field name="is_bodao" class="java.lang.Boolean"/>
+	<field name="is_shuodao" class="java.lang.Boolean"/>
+	<field name="job_resume" class="java.lang.String"/>
+	<field name="job_status" class="java.lang.String"/>
+	<field name="learning_situation" class="java.lang.String"/>
+	<field name="located" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="now_professional" class="java.lang.String"/>
+	<field name="office_phone" class="java.lang.String"/>
+	<field name="political" class="java.lang.String"/>
+	<field name="postal_address" class="java.lang.String"/>
+	<field name="sex" class="java.lang.String"/>
+	<field name="situation_resume" class="java.lang.String"/>
+	<field name="specialty" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="titles" class="java.lang.String"/>
+	<field name="user_id" class="java.lang.Long"/>
+	<field name="work_address" class="java.lang.String"/>
+	<field name="zip_code" class="java.lang.String"/>
+	<field name="nation_id" class="java.lang.Long"/>
+	<field name="organizationname" class="java.lang.String"/>
+	<variable name="record_index" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$V{record_index}.valueOf( 1 )]]></variableExpression>
+		<initialValueExpression><![CDATA[1]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="19" width="802" height="40"/>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[专家基本信息汇总表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="91" height="36"/>
+				<textElement textAlignment="Right">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[学会名称]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="0" width="100" height="36"/>
+				<textElement>
+					<font fontName="文鼎ＰＬ简报宋" size="20" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{organizationname}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="48" height="34"/>
+				<box leftPadding="0">
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="10" width="85" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="133" y="10" width="111" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[出生日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="10" width="173" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[工作单位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="417" y="10" width="137" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[专业]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="554" y="10" width="140" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[技术职称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="694" y="10" width="108" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[联系电话]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="37" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="48" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{record_index}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="0" width="85" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="133" y="0" width="111" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new java.text.SimpleDateFormat("yyyy年MM月dd日")).format($F{birthday})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="244" y="0" width="173" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{work_address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="417" y="0" width="137" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{specialty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="554" y="0" width="140" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duties}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="694" y="0" width="108" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{office_phone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="3" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="107" height="33"/>
+				<textElement textAlignment="Right">
+					<font fontName="文鼎ＰＬ简报宋" size="20"/>
+				</textElement>
+				<text><![CDATA[会员总数：]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="107" y="4" width="283" height="33"/>
+				<textElement>
+					<font size="20" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}+'  ']]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="4" splitType="Stretch"/>
+	</summary>
+</jasperReport>

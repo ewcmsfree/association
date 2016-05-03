@@ -27,6 +27,7 @@
 <ewcms:footer/>
 <script type="text/javascript" src="${ctx}/static/js/clock.js"></script>
 <script type="text/javascript" src="${ctx}/static/js/polling.js"></script>
+<script type="text/javascript" src="${ctx}/static/fcf/js/FusionCharts.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var clock = new Clock();
@@ -84,6 +85,7 @@
 			if (id == 'index'){
 				$('#index').show();
 				$('#center').hide();
+				archiveChart();
 			}else{
 				$('#index').hide();
 				$('#center').show();
@@ -92,8 +94,14 @@
 			}
 			$('.easyui-accordion').accordion('resize');
 		});
-		
-		var currentDate = new Date();
-        var poll = new Poll();
+	    
+	    var poll = new Poll();
+	    archiveChart();
 	});
+	
+	function archiveChart(){
+		var myChart = new FusionCharts('${ctx}/static/fcf/swf/Pie3D.swf?ChartNoDataText=无数据显示', new Date().getTime(), '400', '170');
+   		myChart.setDataURL('${ctx}/archiveChart?_=' + new Date().getTime());
+   		myChart.render('pieDiv');
+	}
 </script>

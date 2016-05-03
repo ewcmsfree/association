@@ -32,9 +32,9 @@ public class PushService {
         basePushService.push(userId, data);
     }
     
-    public void pushCountArchive(String countArchive){
+    public void pushTotalArchive(Long totalArchive){
         Map<String, Object> data = Maps.newHashMap();
-        data.put("countArchive", countArchive);
+        data.put("totalArchive", totalArchive);
         basePushService.push(data);
     }
     

@@ -110,6 +110,21 @@ public class ArchiveService extends BaseService<Archive, Long>{
 		return String.format("现已登记人数：%d，其中未提交审核人数：%d，已提交审核人数：%d，审核通过人数：%d，未审核通过人数：%d", total, countUserEdit, countSubmitThrough, countThrough, countNoThrough);
 	}
 	
+	public Long totalArchive(){
+		return count();
+	}
+	
+	public Map<String, Long> archiveChart(){
+		Map<String, Long> map = Maps.newHashMap();
+		
+		map.put("未提交审核", count(Searchable.newSearchable().addSearchFilter("status", SearchOperator.EQ, ArchiveStatus.useredit)));
+		map.put("已提交审核", count(Searchable.newSearchable().addSearchFilter("status", SearchOperator.EQ, ArchiveStatus.submitthrough)));
+		map.put("审核通过", count(Searchable.newSearchable().addSearchFilter("status", SearchOperator.EQ, ArchiveStatus.through)));
+		map.put("未审核通过", count(Searchable.newSearchable().addSearchFilter("status", SearchOperator.EQ, ArchiveStatus.nothrough)));
+		
+		return map;
+	}
+	
 	public Map<String, Object> findTopRowSubmitThroughArchive(User user, SearchParameter<Long> searchParameter) {
 		Map<String, Object> resultMap = Maps.newHashMap();
 		

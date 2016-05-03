@@ -82,9 +82,4 @@ public class PasswordService {
     public String encryptPassword(String username, String password, String salt) {
         return Md5Utils.hash(username + password + salt);
     }
-
-
-    public static void main(String[] args) {
-        System.out.println(new PasswordService().encryptPassword("monitor", "123456", "iY71e4d123"));
-    }
 }

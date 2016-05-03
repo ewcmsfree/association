@@ -1,43 +1,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>association-parent</artifactId>
-        <groupId>com.ewcms</groupId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../parent/pom.xml</relativePath>
-    </parent>
+	<parent>
+		<artifactId>association-parent</artifactId>
+		<groupId>com.ewcms</groupId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../parent/pom.xml</relativePath>
+	</parent>
 
-    <modelVersion>4.0.0</modelVersion>
-    <artifactId>association-web</artifactId>
-    <packaging>war</packaging>
-    <name>web</name>
-    <url>https://github.com/ewcmsfree/association/web</url>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>association-web</artifactId>
+	<packaging>war</packaging>
+	<name>web</name>
+	<url>https://github.com/ewcmsfree/association/web</url>
 
 	<properties>
 		<support.basedir>${project.parent.parent.basedir}/src/support</support.basedir>
-        <site.basedir>${project.parent.parent.basedir}</site.basedir>
-	
+		<site.basedir>${project.parent.parent.basedir}</site.basedir>
+
 		<association.version>1.0-SNAPSHOT</association.version>
 
 		<postgresql.version>9.4-1206-jdbc41</postgresql.version>
-		
+
+		<jetty.maven.version>8.1.8.v20121106</jetty.maven.version>
+		<tomcat.maven.version>2.2</tomcat.maven.version>
+
 		<lucene.version>3.0.2</lucene.version>
 		<nekohtml.version>1.9.15</nekohtml.version>
 		<solr.versino>1.4.1</solr.versino>
 		<javasimon.version>3.3.0</javasimon.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>${postgresql.version}</version>
 		</dependency>
-		
+
 		<dependency>
-		  <groupId>com.googlecode.log4jdbc</groupId>
-		  <artifactId>log4jdbc</artifactId>
-		  <version>1.2</version>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
+			<version>1.2</version>
 		</dependency>
 
 		<dependency>
@@ -61,7 +64,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.ewcms</groupId>
 			<artifactId>ewcms-entity</artifactId>
@@ -83,4 +86,6 @@
 			<version>${association.version}</version>
 		</dependency>
 	</dependencies>
+
+
 </project>

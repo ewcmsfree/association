@@ -1,10 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
@@ -16,15 +14,21 @@
 
 	<!-- 开启controller注解支持 -->
 	<!-- 注意事项请参考：http://jinnianshilongnian.iteye.com/blog/1762632 -->
-	<context:component-scan base-package="com.ewcms" use-default-filters="false">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
-		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	<context:component-scan base-package="com.ewcms"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
-	
+
 	<!-- 会自动注册了validator ConversionService -->
-	<mvc:annotation-driven validator="validator" conversion-service="conversionService" content-negotiation-manager="contentNegotiationManager"	enable-matrix-variables="true">
+	<mvc:annotation-driven validator="validator"
+		conversion-service="conversionService" content-negotiation-manager="contentNegotiationManager"
+		enable-matrix-variables="true">
 		<!-- 异步支持 默认30秒超时 -->
-		<mvc:async-support default-timeout="30000" task-executor="executor" />
+		<mvc:async-support default-timeout="30000"
+			task-executor="executor" />
 
 		<mvc:message-converters register-defaults="true">
 			<!-- StringHttpMessageConverter编码为UTF-8，防止乱码 -->
@@ -66,7 +70,8 @@
 		</mvc:message-converters>
 
 		<mvc:argument-resolvers>
-			<bean class="com.ewcms.security.user.web.bind.method.CurrentUserMethodArgumentResolver" />
+			<bean
+				class="com.ewcms.security.user.web.bind.method.CurrentUserMethodArgumentResolver" />
 		</mvc:argument-resolvers>
 	</mvc:annotation-driven>
 
@@ -79,7 +84,8 @@
 
 	<!-- 拦截器设置 -->
 	<mvc:interceptors>
-		<bean class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
+		<bean
+			class="org.springframework.web.servlet.handler.ConversionServiceExposingInterceptor">
 			<constructor-arg ref="conversionService" />
 		</bean>
 		<bean class="com.ewcms.common.web.interceptor.SetCommonDataInterceptor">
@@ -91,8 +97,9 @@
 		</bean>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/polling"/>
-			<bean class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" />
+			<mvc:exclude-mapping path="/polling" />
+			<bean
+				class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor" />
 		</mvc:interceptor>
 		<!--<mvc:interceptor> -->
 		<!--<mvc:mapping path="/**"/> -->
@@ -101,7 +108,8 @@
 	</mvc:interceptors>
 
 	<!-- 内容协商管理器 -->
-	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+	<bean id="contentNegotiationManager"
+		class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
 		<!-- 是否忽略Accept Header -->
 		<property name="ignoreAcceptHeader" value="true" />
 		<!-- 默认的content type -->
@@ -115,8 +123,10 @@
 	</bean>
 
 	<!-- ========================= VIEW定义 ========================= -->
-	<bean id="defaultViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+	<bean id="defaultViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="contentType" value="text/html" />
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />

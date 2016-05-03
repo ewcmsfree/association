@@ -54,10 +54,10 @@ function Poll(){
 	           noticesHtml += html + '</table></div>';
 	           $(noticesHtml).appendTo('#notice');
 	        }
-        	$('#countArchive').empty();
-	        if (data.countArchive){
-	        	var html = '<span id="countArchive">' + data.countArchive + '</span>';
-	        	$(html).appendTo('#countArchive');
+        	$('#totalArchive').empty();
+	        if (data.totalArchive){
+	        	var html = '<span id="totalArchive">' + data.totalArchive + '</span>';
+	        	$(html).appendTo('#totalArchive');
 	        }
 	        $('#onlineCount').empty();
 	        if (data.onlineCount){

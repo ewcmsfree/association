@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,10 +73,12 @@ public class GroupRelationController extends BaseCRUDController<GroupRelation, L
 		searchable.addSearchFilter("groupId", SearchOperator.EQ, groupId);
 		searchable.addSort(Direction.ASC, "id");
 		
-		List<GroupRelation> groupRelations = baseService.findAllWithSort(searchable);
+		searchable.setPage(searchParameter.getPage() - 1, searchParameter.getRows());
 		
-		resultMap.put("total", groupRelations.size());
-		resultMap.put("rows", groupRelations);
+		Page<GroupRelation> groupRelations = baseService.findAll(searchable);
+		
+		resultMap.put("total", groupRelations.getTotalElements());
+		resultMap.put("rows", groupRelations.getContent());
 		return resultMap;
 	}
 

@@ -89,8 +89,10 @@ public class Archive extends BaseSequenceEntity<Long> implements LogicDeleteable
 
 	private static final long serialVersionUID = -2099383100016556054L;
 	
+	@NotNull(message = "{not.null}")
 	@Column(name = "user_id")
 	private Long userId;
+	@NotEmpty(message = "{not.null}")
 	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, targetEntity = Organization.class)
 	@JoinTable(name = "pel_archive_organization", joinColumns = @JoinColumn(name = "archive_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "organization_id", referencedColumnName = "id"))
 	@OrderBy(value = "id")

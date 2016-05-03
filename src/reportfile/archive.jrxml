@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="archive" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1"/>
+	<subDataset name="dataset1"/>
+	<subDataset name="dataset2"/>
+	<subDataset name="dataset3"/>
+	<parameter name="name" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="professional" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="specialty" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT t1.id,acad_office, birthday, create_time, duties, fax,
+       goreign_level, allowance, case is_bodao when true then '博导' ELSE '' END AS is_bodao,
+       case is_shuodao when true then '硕导' ELSE '' END AS is_shuodao, job_resume, job_status,
+       learning_situation, located, t1.name, now_professional, office_phone,
+       political, postal_address, case sex when 'male' then '男' ELSE '女' END AS sex, situation_resume, specialty,
+       t1.status, titles, t1.user_id, work_address, zip_code, nation_id,
+       t4.name AS nation_name,t5.email,t5.mobile_phone_number,
+       ARRAY_TO_STRING(array((SELECT name FROM sec_organization AS t3,pel_archive_organization AS t2
+       WHERE t2.archive_id=t1.id AND t2.organization_id=t3.id)),',') AS organization_name,
+       ARRAY_TO_STRING(array((SELECT name FROM pel_archive_current_state AS t7,pel_current_state AS t8
+       WHERE t7.currentstate_id = t8.id AND t7.archive_id=t1.id)),',') AS currentstate_name,
+       ARRAY_TO_STRING(array((SELECT name FROM pel_archive_allowance AS t9,pel_allowance AS t10
+       WHERE t9.allowance_id=t10.id AND t9.archive_id=t1.id)),',') AS allowance_name,
+       ARRAY_TO_STRING(array(SELECT university_name FROM pel_education_experience AS t11 WHERE t11.user_id=t1.user_id),'@') AS university_name,
+       ARRAY_TO_STRING(array(SELECT major FROM pel_education_experience AS t12 WHERE t12.user_id=t1.user_id),'@') AS major,
+       ARRAY_TO_STRING(array(SELECT graduation_date FROM pel_education_experience AS t13 WHERE t13.user_id=t1.user_id),'@') AS graduation_date,
+       ARRAY_TO_STRING(array(SELECT education FROM pel_education_experience AS t14 WHERE t14.user_id=t1.user_id),'@') AS education,
+       ARRAY_TO_STRING(array(SELECT degree FROM pel_education_experience AS t15 WHERE t15.user_id=t1.user_id),'@') AS degree
+  FROM pel_archive AS t1,pel_nation AS t4,sec_user AS t5
+  WHERE  t1.nation_id=t4.id AND t1.user_id=t5.id
+  AND t1.name like'%'||$P{name}||'%' AND now_professional like '%'||$P{professional}||'%' AND specialty like '%'||$P{specialty}||'%']]>
+	</queryString>
+	<field name="id" class="java.lang.Long"/>
+	<field name="acad_office" class="java.lang.String"/>
+	<field name="birthday" class="java.sql.Date"/>
+	<field name="create_time" class="java.sql.Timestamp"/>
+	<field name="duties" class="java.lang.String"/>
+	<field name="fax" class="java.lang.String"/>
+	<field name="goreign_level" class="java.lang.String"/>
+	<field name="allowance" class="java.lang.String"/>
+	<field name="is_bodao" class="java.lang.String"/>
+	<field name="is_shuodao" class="java.lang.String"/>
+	<field name="job_resume" class="java.lang.String"/>
+	<field name="job_status" class="java.lang.String"/>
+	<field name="learning_situation" class="java.lang.String"/>
+	<field name="located" class="java.lang.String"/>
+	<field name="name" class="java.lang.String"/>
+	<field name="now_professional" class="java.lang.String"/>
+	<field name="office_phone" class="java.lang.String"/>
+	<field name="political" class="java.lang.String"/>
+	<field name="postal_address" class="java.lang.String"/>
+	<field name="sex" class="java.lang.String"/>
+	<field name="situation_resume" class="java.lang.String"/>
+	<field name="specialty" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="titles" class="java.lang.String"/>
+	<field name="user_id" class="java.lang.Long"/>
+	<field name="work_address" class="java.lang.String"/>
+	<field name="zip_code" class="java.lang.String"/>
+	<field name="nation_id" class="java.lang.Long"/>
+	<field name="nation_name" class="java.lang.String"/>
+	<field name="email" class="java.lang.String"/>
+	<field name="mobile_phone_number" class="java.lang.String"/>
+	<field name="organization_name" class="java.lang.String"/>
+	<field name="currentstate_name" class="java.lang.String"/>
+	<field name="allowance_name" class="java.lang.String"/>
+	<field name="university_name" class="java.lang.String"/>
+	<field name="major" class="java.lang.String"/>
+	<field name="graduation_date" class="java.lang.String"/>
+	<field name="education" class="java.lang.String"/>
+	<field name="degree" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="7" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="5" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="3" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="765" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="77" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[姓 名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="113" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[籍 贯]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="149" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[工作单位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="185" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[技术职称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="221" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[通讯地址]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="257" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[办公电话]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="293" width="70" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[手机]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="77" width="99" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="169" y="77" width="50" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[性 别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="77" width="75" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[出生日期]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="359" y="77" width="101" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[(new java.text.SimpleDateFormat("yyyy年MM月dd日")).format($F{birthday})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="77" width="95" height="144"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[照片]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="219" y="77" width="65" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sex}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="473" width="91" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[现从事专业]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="547" width="91" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[进修情况（国内、国外）]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="621" width="91" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[参加全国、国际学术组织（机构）及任职情况]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="70" y="113" width="99" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{located}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="169" y="113" width="50" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[民族]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="219" y="113" width="65" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nation_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="284" y="113" width="75" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[政治面貌]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="359" y="113" width="101" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{political}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="149" width="149" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{work_address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="219" y="149" width="65" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[职务及学会任职]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="284" y="149" width="176" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{duties}+" "+$F{acad_office}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="185" width="132" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titles}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="202" y="185" width="109" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[是否硕、博导]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="311" y="185" width="149" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{is_shuodao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="221" width="289" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postal_address}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="221" width="75" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[邮政编码]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="221" width="121" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zip_code}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="257" width="289" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{office_phone}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="359" y="257" width="75" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[传 真]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="434" y="257" width="121" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="293" width="183" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{mobile_phone_number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="253" y="293" width="58" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="311" y="293" width="244" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="473" width="193" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{now_professional}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="284" y="473" width="66" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[特长专业]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="350" y="473" width="205" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{specialty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="547" width="464" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{learning_situation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="91" y="621" width="464" height="74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{job_status}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="41"/>
+				<textElement textAlignment="Center">
+					<font fontName="文鼎ＰＬ简报宋" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[专家信息登记表]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="41" width="58" height="36"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[学会名称]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="41" width="495" height="36"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{organization_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="695" width="91" height="61"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[享受政府津贴情况]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="695" width="231" height="61"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{allowance_name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="322" y="695" width="91" height="61"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[熟悉何种外语及熟练程度]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="413" y="695" width="142" height="61"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{goreign_level}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="504" y="329" width="51" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[学位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="329" width="137" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[就读院校名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="137" y="329" width="198" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[所学专业]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="335" y="329" width="111" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[毕业时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="329" width="58" height="36"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[学历]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="365" width="137" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{university_name}.split('@').length>0?$F{university_name}.split('@')[0]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="402" width="137" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{university_name}.split('@').length>1?$F{university_name}.split('@')[1]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="439" width="137" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{university_name}.split('@').length>2?$F{university_name}.split('@')[2]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="365" width="198" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{major}.split('@').length>0?$F{major}.split('@')[0]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="402" width="198" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{major}.split('@').length>1?$F{major}.split('@')[1]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="137" y="439" width="198" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{major}.split('@').length>2?$F{major}.split('@')[2]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="365" width="111" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{graduation_date}.split('@').length>0?$F{graduation_date}.split('@')[0]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="402" width="111" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{graduation_date}.split('@').length>1?$F{graduation_date}.split('@')[1]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="335" y="439" width="111" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{graduation_date}.split('@').length>2?$F{graduation_date}.split('@')[2]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="365" width="58" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{education}.split('@').length>0?$F{education}.split('@')[0]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="402" width="58" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{education}.split('@').length>1?$F{education}.split('@')[1]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="439" width="58" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{education}.split('@').length>2?$F{education}.split('@')[2]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="365" width="51" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{degree}.split('@').length>0?$F{degree}.split('@')[0]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="439" width="51" height="34"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{degree}.split('@').length>2?$F{degree}.split('@')[2]:'']]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="402" width="51" height="37"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{degree}.split('@').length>1?$F{degree}.split('@')[1]:'']]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="782">
+			<staticText>
+				<reportElement x="0" y="0" width="27" height="290"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[工作简历]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="290" width="27" height="442"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[主要科研成果、论著、论文及获奖情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="732" width="89" height="50"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<text><![CDATA[目前情况]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="27" y="0" width="528" height="290"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{job_resume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="290" width="528" height="442"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{situation_resume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="732" width="466" height="50"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font fontName="文鼎ＰＬ简报宋" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{currentstate_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="5" splitType="Stretch"/>
+	</summary>
+</jasperReport>

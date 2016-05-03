@@ -154,7 +154,7 @@ public class ArchiveController extends BaseCRUDController<Archive, Long>{
     	
 		return viewName("edit");
 	}
-
+	
 	@RequestMapping(value = "save/discard", method = RequestMethod.POST)
 	@Override
 	public String save(Model model, Archive m, BindingResult result, List<Long> selections) {

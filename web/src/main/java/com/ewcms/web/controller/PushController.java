@@ -57,7 +57,7 @@ public class PushController {
         if(!basePushService.isOnline(userId)) {
             Long unreadMessageCount = msgReceiveService.findUnReadMessageCountByUserId(userId);
             List<Map<String, Object>> notices = msgSendService.findTopRowNoticesOrSubscription(MsgType.NOTICE, 10);
-            String countArchive = archiveService.findCountArchive();
+            Long totalArchive = archiveService.totalArchive();
             Integer onlineCount = userOnlineService.countOnline();
             //List<Map<String, Object>> subscriptions = msgSendService.findTopRowNoticesOrSubscription(MsgType.SUBSCRIPTION, 10);
             //List<Map<String, Object>> todos = articleMainService.findBeApprovalArticleMain(userId);
@@ -66,7 +66,7 @@ public class PushController {
             Map<String, Object> data = new HashMap<String, Object>();
             data.put("unreadMessageCount", unreadMessageCount);
             data.put("notices", notices);
-            data.put("countArchive", countArchive);
+            data.put("totalArchive", totalArchive);
             data.put("onlineCount", onlineCount);
             //data.put("subscriptions", subscriptions);
             //data.put("todos", todos);
