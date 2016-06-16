@@ -5,7 +5,7 @@
 	pg_dump --host localhost --username postgres --encoding UTF8 --file C:\ewcms_association.dump ewcms_association
 
 ##数据库恢复
-	psql --host localhost --username postgres --dbname ewcms_rc < E:\work\ewcms_association.dump
+	psql --host localhost --username postgres --dbname ewcms_association < E:\work\ewcms_association.dump
 
 ##修改catalina.sh
 	JAVA_OPTS="$JAVA_OPTS -server -Xms800m -Xmx800m -XX:PermSize=64m -XX:MaxNewSize=256m -XX:MaxPermSize=128m -Djava.awt.headless=true"

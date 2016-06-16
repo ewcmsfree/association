@@ -5,8 +5,7 @@
 	<table id="tt"></table>
 	<div id="tb" style="padding:5px;height:auto;">
         <div class="toolbar" style="margin-bottom:2px">
-			<a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add',toggle:true" onclick="$.ewcms.add({title:'添加',width:700,height:200});" href="javascript:void(0);">添加</a>
-			<a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-remove',toggle:true" onclick="$.ewcms.remove({title:'移除'});" href="javascript:void(0);" >移除</a>
+			<a class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-add',toggle:true" onclick="$.ewcms.add({title:'重设',width:700,height:200});" href="javascript:void(0);">重设</a>
 		</div>
         <div  style="padding-left:5px;">
         	<form id="queryform" style="padding:0;margin:0;">

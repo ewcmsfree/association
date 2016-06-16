@@ -35,9 +35,7 @@
 		<div style="margin-bottom:2px">
 			<a id="tb-through" href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#menu-through',iconCls:'icon-status'">审核</a>
 			<a id="tb-status" href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#menu-status',iconCls:'icon-operate'">操作</a>
-			<!-- 
 			<a id="tb-print" href="javascript:void(0);" class="easyui-menubutton" data-options="menu:'#menu-print',iconCls:'icon-print'">打印</a>
-			 -->
 		</div>
 		<div id="menu-through" style="width:150px">
 			<div id="menu-through-true" data-options="iconCls:'icon-ok'" onclick="$.ewcms.status({status:'true',info:'专家信息审核通过',prompt:false});">通过</div>
@@ -47,12 +45,10 @@
 			<div id="menu-remove" data-options="iconCls:'icon-lock'" onclick="$.ewcms.remove({title:'禁止'});">禁止用户</div>
 			<div id="menu-recycle" data-options="iconCls:'icon-recycle'">解封用户</div>
 		</div>
-		<!-- 
 		<div id="menu-print" style="width:150px">
 			<div id="menu-print-archive" data-options="iconCls:''">登记表</div>
 			<div id="menu-print-statistics" data-options="iconCls:''">汇总表</div>
 		</div>
-		 -->
         <div style="margin-bottom:2px">
         	<form id="queryform">
         		<table class="formtable">
@@ -217,7 +213,11 @@
 		});
 		
 		$('#menu-print-archive').bind('click', function(){
-			console.log($('#tt').datagrid('getData'));
+			window.open('${ctx}/personnel/archive/printArchive','popup','width=1280,height=700,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,scrollbars=yes,left=' + (window.screen.width - 1280)/ 2 + ',top=' + (window.screen.height - 700) / 2);
+		});
+		
+		$('#menu-print-statistics').bind('click', function(){
+			window.open('${ctx}/personnel/archive/printSummary','popup','width=1280,height=700,resizable=yes,toolbar=no,directories=no,location=no,menubar=no,status=no,scrollbars=yes,left=' + (window.screen.width - 1280)/ 2 + ',top=' + (window.screen.height - 700) / 2);
 		});
 	});
 	

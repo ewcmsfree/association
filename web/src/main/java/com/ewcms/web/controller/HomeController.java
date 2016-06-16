@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.dom4j.Element;
@@ -53,7 +51,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "archiveChart")
 	@ResponseBody
-	public String archiveChart(HttpServletResponse resp){
+	public String archiveChart(){
 		XMLUtil xml = new XMLUtil();
 		Element graph = xml.addRoot("graph");
 		xml.addAttribute(graph, "basefontsize", "12");
@@ -70,7 +68,7 @@ public class HomeController {
 			Element set = xml.addNode(graph, "set");
 			set.addAttribute("name", key);
 			set.addAttribute("value", total.toString());
-			set.addAttribute("color", Integer.toHexString((int) (Math.random() * 255 * 255 * 255)).toUpperCase());
+			//set.addAttribute("color", Integer.toHexString((int) (Math.random() * 255 * 255 * 255)).toUpperCase());
 		}
 		
 		return xml.getXML();
