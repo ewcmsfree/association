@@ -41,6 +41,7 @@ import com.ewcms.personnel.currentstate.service.CurrentStateService;
 import com.ewcms.personnel.photo.service.PhotoService;
 import com.ewcms.security.organization.service.OrganizationService;
 import com.ewcms.security.user.entity.User;
+import com.ewcms.security.user.entity.UserOrganizationJob;
 import com.ewcms.security.user.service.UserOrganizationJobService;
 import com.ewcms.security.user.web.bind.annotation.CurrentUser;
 import com.ewcms.system.report.entity.TextReport;
@@ -303,6 +304,46 @@ public class ArchiveController extends BaseCRUDController<Archive, Long>{
 	@ResponseBody
 	public Map<String, Object> querySummary(@CurrentUser User user, @ModelAttribute SearchParameter<Long> searchParameter) {
 		return getArchiveService().findTopRowSubmitThroughArchive(user, searchParameter);
+	}
+
+	@RequestMapping(value = "printSummary")
+	public void printSummary(@CurrentUser User user, HttpServletResponse response){
+        response.setDateHeader("Expires", 0L);
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        response.setHeader("Pragma", "no-cache");
+
+        List<UserOrganizationJob> userOrganizationJobs = user.getOrganizationJobs();
+        if (!userOrganizationJobs.isEmpty()){
+        	for (UserOrganizationJob userOrganizationJob : userOrganizationJobs){
+        		Long organizatoinId = userOrganizationJob.getOrganizationId();
+        		
+        		Map<String, String> paramMap = Maps.newHashMap();
+                paramMap.put("organization_id", String.valueOf(organizatoinId));
+                
+                textReportService.buildText(paramMap, 3L, TextReport.Type.PDF, response);
+        	}
+        }
+	}
+	
+	@RequestMapping(value = "printArchive")
+	public void printArchive(@CurrentUser User user, HttpServletResponse response){
+        response.setDateHeader("Expires", 0L);
+        response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+        response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+        response.setHeader("Pragma", "no-cache");
+
+        List<UserOrganizationJob> userOrganizationJobs = user.getOrganizationJobs();
+        if (!userOrganizationJobs.isEmpty()){
+        	for (UserOrganizationJob userOrganizationJob : userOrganizationJobs){
+        		Long organizatoinId = userOrganizationJob.getOrganizationId();
+        		
+        		Map<String, String> paramMap = Maps.newHashMap();
+                paramMap.put("organization_id", String.valueOf(organizatoinId));
+                
+                textReportService.buildText(paramMap, 4L, TextReport.Type.PDF, response);
+        	}
+        }
 	}
 
 	

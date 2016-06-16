@@ -40,7 +40,7 @@
 			        			<span class="input_wrap">
 			        				<form:input path="email" cssClass="txt_input txt_270 validate[required,custom[email],ajax[ajaxCall]]"/>
 			        			</span>
-			        			<div style="display:block" class="txt_tips">请输入您常用的邮箱</div>
+			        			<div style="display:block" class="txt_tips txt_tips_double">请输入您常用的邮箱，全部使<br>用小写字母</div>
 			        		</div>
 			        		<div class="item clearfix">
 			        			<label class="txt_label">手机号</label>
@@ -117,5 +117,6 @@
             maxErrorsPerField: 1,
             showOneMessage: true
         });
+        <ewcms:showFieldError commandName="m"/>
 	});
 </script>
