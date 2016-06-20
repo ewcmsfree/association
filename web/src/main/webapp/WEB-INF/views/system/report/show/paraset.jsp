@@ -26,10 +26,10 @@
 				  								<input type="checkbox" name="paramMap['${parameter.enName}']" value="${parameter.defaultValue}"/>
 				  							</c:if>
 				  							<c:if test="${parameter.type == 'LIST'}">
-				  								<form:select path="value" name="paramMap['${parameter.enName}']" cssClass="easyui-combobox" data-options="editable:false"></form:select>
+				  								<form:select path="paramMap['${parameter.enName}']" items="${parameter.paramMap}" cssClass="easyui-combobox" data-options="panelHeight:100"></form:select>
 				  							</c:if>
 				  							<c:if test="${parameter.type == 'CHECK'}">
-				  								<form:checkboxes path="name" items="value" name="${parameter.enName}" onclick="checkBoxValue('${parameter.enName}')"/>
+				  								<form:checkboxes path="paramMap['${parameter.enName}']" items="${parameter.paramMap}" onclick="checkBoxValue('${parameter.enName}')"/>
 				  							</c:if>
 				  							<c:if test="${parameter.type == 'DATE'}">
 				  								<input type="text" name="paramMap['${parameter.enName}']" class="easyui-datebox"/>
@@ -65,6 +65,12 @@
 	</div>
 <ewcms:footer/>
 <script type="text/javascript">
+	$(function(){
+		if ($('select:not(#textType)')){
+			$('select:not(#textType)').combobox('setValue', '');
+		}
+	});
+	
 	function checkBoxValue(name){
 		var strValue = '';
 		var list = document.getElementsByName(name);
