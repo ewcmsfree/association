@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/jspf/taglibs.jspf" %>
 
-<ewcms:head title="注册 - 学会用户"/>
+<ewcms:head title="用户注册 - 江西省科协专家库平台管理系统"/>
 	<link rel="stylesheet" type="text/css" href="${ctx}/static/css/register.css"/>
 	<ewcms:showMessage/>
 	<div class="w1000 clearfix p_relative">
   		<div class="">
 			<div class="form_area">
-     			<h1 class="title" style="text-align: center;font-size:200%">注册学会会员</h1>
+     			<h1 class="title" style="text-align: center;font-size:200%">注册专家库会员</h1>
 		 		<form:form id="registerForm" name="registerForm" action="${ctx}/register" method="post" commandName="m">
 		    		<ewcms:showGlobalError commandName="m"/>
 		    		<form:hidden path="id"/>
@@ -60,7 +60,7 @@
 			        		</div>
 			       			<div class="item clearfix pt_10 mb_0">
 	            				<input type="checkbox" class="txt_check" name="agreement" id="agreement" checked="checked">
-	           					<label class="txt_check_label gray" for="agreement">我已阅读并同意<a target="_blank" href="#">《XXXX使用协议》</a></label>
+	           					<label class="txt_check_label gray" for="agreement">我已阅读并同意<a target="_blank" href="${ctx}/agreement">《江西省科协专家库平台管理系统使用协议》</a></label>
 	          				</div>
 			       			<div class="item clearfix btn_area">
 	           					<input type="submit" value="提交注册" class="btn btn01" id="reg-submit">

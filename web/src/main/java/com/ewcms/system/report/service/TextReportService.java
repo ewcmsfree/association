@@ -79,7 +79,7 @@ public class TextReportService extends BaseService<TextReport, Long>{
 	public TextReport update(TextReport textReport) {
 		TextReport entity = findOne(textReport.getId());
 		
-		if (textReport.getBaseDs().getId() == 0L){
+		if (textReport.getBaseDs() == null || textReport.getBaseDs().getId() == 0L){
 			entity.setBaseDs(null);
 		}else{
 			BaseDs baseDs = baseDsService.findOne(textReport.getBaseDs().getId());

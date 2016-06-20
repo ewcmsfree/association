@@ -51,7 +51,7 @@ public class ChartReportService extends BaseService<ChartReport, Long>{
 		Set<Parameter> parameters = ChartAnalysisUtil.analysisSql(chartReport.getChartSql());
 		chartReport.setParameters(parameters);
 		
-		if (chartReport.getBaseDs().getId() == 0L){
+		if (chartReport.getBaseDs() == null || chartReport.getBaseDs().getId() == 0L){
 			chartReport.setBaseDs(null);
 		}else{
 			BaseDs baseDs = baseDsService.findOne(chartReport.getBaseDs().getId());

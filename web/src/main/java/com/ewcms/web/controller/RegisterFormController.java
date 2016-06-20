@@ -26,7 +26,7 @@ public class RegisterFormController extends BaseController<User, Long>{
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = "register", method = RequestMethod.GET)
 	public String showSaveForm(Model model){
 		if (!model.containsAttribute("m")) {
             model.addAttribute("m", newModel());
@@ -34,7 +34,7 @@ public class RegisterFormController extends BaseController<User, Long>{
 		return "register";
 	}
 	
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String save(Model model, @Valid @ModelAttribute("m") User m, BindingResult result, RedirectAttributes redirectAttributes){
 		if (hasError(m, result)) {
             return showSaveForm(model);
@@ -47,6 +47,11 @@ public class RegisterFormController extends BaseController<User, Long>{
 		return redirectToUrl("login");
 	}
 	
+	@RequestMapping(value = "agreement")
+	public String agreement(){
+		return "agreement";
+	}
+	
     /**
      * 验证返回格式
      * 单个：[fieldId, 1|0, msg]
@@ -56,7 +61,7 @@ public class RegisterFormController extends BaseController<User, Long>{
      * @param fieldValue
      * @return
      */
-    @RequestMapping(value = "/register/validate", method = RequestMethod.GET)
+    @RequestMapping(value = "register/validate", method = RequestMethod.GET)
     @ResponseBody
     public Object validate(
             @RequestParam("fieldId") String fieldId, @RequestParam("fieldValue") String fieldValue) {

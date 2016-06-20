@@ -21,7 +21,7 @@ public class StaticData extends Data {
 
     private static final long serialVersionUID = 358643064266693606L;
     
-    @Column(name = "value")
+    @Column(name = "value", columnDefinition = "text")
     private String value;
 
     public String getValue() {

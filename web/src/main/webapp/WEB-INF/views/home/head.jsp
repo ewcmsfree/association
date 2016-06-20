@@ -8,7 +8,7 @@
 				<tr>
 					<td><img src="${ctx}/static/image/top_bg_ewcms.gif" height="30px" border="0" style="border:0;padding-left:4px;padding-top:10px;"/></td>
 				</tr>
-				<tr><td align="center">江西省科协管理系统V1.0</td></tr>
+				<tr><td align="center">科协专家库平台管理系统V1.1</td></tr>
 			</table>
 		</td>
 		<td>
