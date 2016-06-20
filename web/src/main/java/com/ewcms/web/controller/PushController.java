@@ -41,7 +41,7 @@ public class PushController {
      * 获取页面的提示信息
      * @return
      */
-    @RequestMapping(value = "/polling")
+    @RequestMapping(value = "polling")
     @ResponseBody
     public Object polling(@CurrentUser User user, HttpServletResponse resp) {
         resp.setHeader("Connection", "Keep-Alive");

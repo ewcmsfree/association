@@ -1,7 +1,5 @@
 package com.ewcms.system.report.generate.util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -11,6 +9,8 @@ import com.ewcms.system.report.entity.data.StaticData;
 import com.ewcms.system.report.entity.view.ComponentView;
 import com.ewcms.system.report.entity.view.SessionView;
 import com.ewcms.system.report.generate.entity.PageShowParam;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 
 /**
  * 数据库中的参数值转换成页面对象
@@ -26,10 +26,10 @@ public class ParamConversionPage {
      * @return 页面显示记录集
      */
     public static List<PageShowParam> conversion(Set<Parameter> paramSet) {
-        List<PageShowParam> pspList = new ArrayList<PageShowParam>();
+        List<PageShowParam> pspList = Lists.newArrayList();
         if (paramSet != null && paramSet.size() > 0) {
             for (Parameter param : paramSet) {
-                Map<String, String> showValue = new HashMap<String, String>();
+                Map<String, String> showValue = Maps.newHashMap();
                 if (param.getType() == Parameter.Type.SESSION) {
                     ComponentView componentView = param.getComponentView();
                     if (componentView != null) {

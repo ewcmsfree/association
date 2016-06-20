@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 		<div data-options="region:'north',border:false" style="height:60px;overflow:no;">
-		    <h2 align="center">欢迎使用江西省科协管理平台系统</h2>
+		    <h2 align="center">欢迎使用江西省科协专家库平台管理系统</h2>
 		</div>
 		<div data-options="region:'center',border:false" style="width:35%;overflow:auto;">
 			<table style="width:100%;padding:0;">

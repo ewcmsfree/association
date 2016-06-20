@@ -5,7 +5,7 @@
 	<div id="edit-from" class="easyui-layout" data-options="fit:true" style="border:0;">
 		<ewcms:showMessage/>
 		<div data-options="region:'center',border:false">	
-		 	<form:form id="editForm" method="post" action="${ctx}/system/report/parameter/save" commandName="m"  class="form-horizontal">
+		 	<form:form id="editForm" method="post" action="${ctx}/system/report/parameter/${reportType}/${reportId}/save" commandName="m"  class="form-horizontal">
 		    	<ewcms:showGlobalError commandName="m"/>
 		    	<form:hidden path="className"/>
 		    	<c:forEach var="selection" items="${selections}">

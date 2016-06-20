@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.validation.Valid;
 
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.alibaba.fastjson.JSON;
 import com.ewcms.common.web.controller.BaseCRUDController;
+import com.ewcms.security.user.entity.User;
+import com.ewcms.security.user.web.bind.annotation.CurrentUser;
 import com.ewcms.system.report.entity.ChartReport;
 import com.ewcms.system.report.entity.Parameter;
 import com.ewcms.system.report.entity.TextReport;
@@ -58,8 +62,39 @@ public class ParameterController extends BaseCRUDController<Parameter, Long>{
 	}	
 	
 	@RequestMapping(value = "{reportType}/{reportId}/save", method = RequestMethod.POST)
-	public String save(@PathVariable(value = "reportType") String reportType, @PathVariable(value = "reportId") Long reportId,Model model, @Valid @ModelAttribute("m") Parameter m, BindingResult result, @RequestParam(required = false) List<Long> selections) {
-		return super.save(model, m, result, selections);
+	public String save(@CurrentUser User user, @PathVariable(value = "reportType") String reportType, @PathVariable(value = "reportId") Long reportId,Model model, @Valid @ModelAttribute("m") Parameter m, BindingResult result, @RequestParam(required = false) List<Long> selections) {
+		if (hasError(m, result)) {
+            return showSaveForm(model, selections);
+        }
+
+		setCommonData(model);
+		
+		if (m.getId() != null && StringUtils.hasText(m.getId().toString())) {
+	        if (permissionList != null) {
+	            this.permissionList.assertHasUpdatePermission();
+	        }
+			
+	        if (m.getType() == Parameter.Type.SESSION){
+				m.setDefaultValue(user.getUsername());
+			}
+	        
+	        Long parameterId = null;
+			if ("text".equals(reportType)){
+				parameterId = textReportService.updTextReportParameter(reportId, m);
+			} else if ("chart".equals(reportType)){
+				parameterId = chartReportService.updChartReportParameter(reportId, m);
+			}
+			
+	        Parameter lastM = parameterService.findOne(parameterId);
+			
+			selections.remove(0);
+			if (selections == null || selections.isEmpty()) {
+				model.addAttribute("close", true);
+			}
+			model.addAttribute("lastM", JSON.toJSONString(lastM));
+		}
+		
+		return showSaveForm(model, selections);
 	}
 	
 	@RequestMapping(value = "{reportType}/{reportId}/query")

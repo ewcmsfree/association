@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-    	<title>EWCMS 用户登录</title>
+    	<title>用户登录 - 江西省科协专家库平台管理系统</title>
     	<script src="${ctx}/static/js/loading.js" charset="utf-8" type="text/javascript"></script>
     	<link href="${ctx}/static/jQuery-Validation-Engine/css/validationEngine.jquery.css" rel="stylesheet" type="text/css"/>
     	<link href="${ctx}/static/css/login.css"  type="text/css" rel="stylesheet"/>

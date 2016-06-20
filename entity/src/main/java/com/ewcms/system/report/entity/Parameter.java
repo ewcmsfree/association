@@ -69,7 +69,7 @@ public class Parameter extends BaseSequenceEntity<Long> {
     private Type type;
     @Column(name = "defaultvalue")
     private String defaultValue;
-    @Column(name = "value")
+    @Column(name = "value",columnDefinition = "text")
     private String value;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, targetEntity = ComponentView.class)
     @JoinColumn(name = "componentview_id")
