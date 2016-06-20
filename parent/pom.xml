@@ -289,7 +289,7 @@
 
 		<javassist.version>3.18.0-GA</javassist.version>
 
-		<shiro.version>1.2.3</shiro.version>
+		<shiro.version>1.2.5</shiro.version>
 
 		<ehcache.core.version>2.6.6</ehcache.core.version>
 
