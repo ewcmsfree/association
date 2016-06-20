@@ -1,6 +1,8 @@
 package org.apache.shiro.realm;
 
 import java.util.Set;
+
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -50,11 +52,11 @@ public class UserRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 因为非正常退出，即没有显式调用 SecurityUtils.getSubject().logout()
 		// (可能是关闭浏览器，或超时)，但此时缓存依旧存在(principals)，所以会自己跑到授权方法里。
-//		if (!SecurityUtils.getSubject().isAuthenticated()) {
-//			doClearCache(principals);
-//			SecurityUtils.getSubject().logout();
-//			return null;
-//		}
+		if (!SecurityUtils.getSubject().isAuthenticated()) {
+			doClearCache(principals);
+			SecurityUtils.getSubject().logout();
+			return null;
+		}
 
     	String username = (String) principals.getPrimaryPrincipal();
         User user = userService.findByUsername(username);
