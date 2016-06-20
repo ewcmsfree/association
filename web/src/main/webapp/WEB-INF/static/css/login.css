@@ -109,6 +109,9 @@ form {
 .user_bottom_l {
 	background: url(../image/login/user_bottom_l.gif) no-repeat 50% top
 }
+.user_title_l {
+	color: white;font-size: 30px;height:30px;text-align: center;width:100%;
+}
 .user_top_r {
 	float: left; width: 180px
 }

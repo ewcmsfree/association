@@ -34,6 +34,11 @@
 	<body id="userlogin_body">
 		<div id="user_login">
 			<dl>
+				<dd id="user_bottom">
+				  	<ul>
+				    	<li class="user_title_l">江西省科协专家库平台管理系统</li>
+					</ul>
+				</dd>
 		  		<dd id="user_top">
 			  		<ul>
 			    		<li class="user_top_l"></li>
